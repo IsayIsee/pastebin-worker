@@ -173,7 +173,7 @@ export function PasteBin() {
       </div>
       <p className="my-2">部署在 Cloudflare Workers 上的开源 Pastebin</p>
       <p className="my-2">
-        <b>用法</b>: 在此处粘贴文本或文件。上传。使用 URL 共享。或使用我们的 {" "}
+        <b>用法</b>: 在此处粘贴文本或上传文件，使用 URL 共享。或使用我们的 {" "}
         <Link className={tst} href={`${BaseUrl}/api`}>
           APIs
         </Link>
