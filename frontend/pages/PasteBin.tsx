@@ -102,7 +102,7 @@ export function PasteBin() {
             })
           }
         } catch (e) {
-          handleError(`Error on Fetching ${pasteUrl}`, e as Error)
+          handleError(`获取 ${pasteUrl} 发生错误`, e as Error)
         }
       })
     }
@@ -114,7 +114,7 @@ export function PasteBin() {
         const uploaded = await uploadPaste(pasteSetting, editorState, setUploadedEncryptionKey, setLoadingProgress)
         setPasteResponse(uploaded)
       } catch (e) {
-        handleError("Error on Uploading Paste", e as Error)
+        handleError("上传 Paste 发生错误", e as Error)
       }
     })
   }
@@ -124,13 +124,13 @@ export function PasteBin() {
       try {
         const resp = await fetch(pasteSetting.manageUrl, { method: "DELETE" })
         if (resp.ok) {
-          showModal("Deleted Successfully", "It may takes 60 seconds for the deletion to propagate to the world")
+          showModal("删除成功", "删除操作可能需要 60 秒才能在全球网络完成同步")
           setPasteResponse(undefined)
         } else {
-          await handleFailedResp("Error on Delete Paste", resp)
+          await handleFailedResp("删除 Paste 发生错误", resp)
         }
       } catch (e) {
-        handleError("Error on Delete Paste", e as Error)
+        handleError("删除 Paste 发生错误", e as Error)
       }
     })
   }
@@ -171,17 +171,16 @@ export function PasteBin() {
           className="absolute right-0"
         />
       </div>
-      <p className="my-2">An open source pastebin deployed on Cloudflare Workers. </p>
+      <p className="my-2">部署在 Cloudflare Workers 上的开源 Pastebin</p>
       <p className="my-2">
-        <b>Usage</b>: Paste text or file here. Upload. Share it with a URL. Or access with our{" "}
+        <b>用法</b>: 在此处粘贴文本或文件。上传。使用 URL 共享。或使用我们的 {" "}
         <Link className={tst} href={`${BaseUrl}/api`}>
           APIs
         </Link>
         .
       </p>
       <p className="my-2">
-        <b>Warning</b>: Only for temporary share <b>(max {maxExpirationReadable})</b>. Files could be deleted without
-        notice!
+        <b>注意</b>: 仅用于临时共享<b>（最多 {maxExpirationReadable}）</b>。文件可能会被删除，恕不另行通知！
       </p>
     </div>
   )
@@ -194,11 +193,11 @@ export function PasteBin() {
         className={`mr-4 ${tst}`}
         isDisabled={!canUpload() || isUploadPending}
       >
-        {pasteSetting.uploadKind === "manage" ? "Update" : "Upload"}
+        {pasteSetting.uploadKind === "manage" ? "更新" : "上传"}
       </Button>
       {pasteSetting.uploadKind === "manage" ? (
         <Button color="danger" onPress={onStartDelete} className={tst} isDisabled={!canDelete()}>
-          Delete
+          删除
         </Button>
       ) : null}
     </div>

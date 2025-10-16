@@ -30,7 +30,7 @@ export async function genKey(scheme: EncryptionScheme): Promise<CryptoKey> {
   if (scheme === "AES-GCM") {
     return await crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, ["encrypt", "decrypt"])
   }
-  throw new Error(`Unsupported encryption scheme: ${scheme as string}`)
+  throw new Error(`不支持的加密方案: ${scheme as string}`)
 }
 
 export async function encrypt(scheme: EncryptionScheme, key: CryptoKey, msg: Uint8Array): Promise<Uint8Array> {
@@ -39,7 +39,7 @@ export async function encrypt(scheme: EncryptionScheme, key: CryptoKey, msg: Uin
     const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, msg)
     return concat(iv, new Uint8Array(ciphertext))
   }
-  throw new Error(`Unsupported encryption scheme: ${scheme as string}`)
+  throw new Error(`不支持的加密方案: ${scheme as string}`)
 }
 
 export async function decrypt(
@@ -56,7 +56,7 @@ export async function decrypt(
       return null
     }
   }
-  throw new Error(`Unsupported encryption scheme: ${scheme as string}`)
+  throw new Error(`不支持的加密方案: ${scheme as string}`)
 }
 
 export async function encodeKey(key: CryptoKey): Promise<string> {
@@ -68,5 +68,5 @@ export async function decodeKey(scheme: EncryptionScheme, key: string): Promise<
   if (scheme === "AES-GCM") {
     return await crypto.subtle.importKey("raw", base64VariantDecode(key), "AES-GCM", true, ["encrypt", "decrypt"])
   }
-  throw new Error(`Unsupported encryption scheme: ${scheme as string}`)
+  throw new Error(`不支持的加密方案: ${scheme as string}`)
 }

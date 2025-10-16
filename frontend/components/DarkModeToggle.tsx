@@ -76,11 +76,11 @@ interface MyComponentProps extends ButtonProps {
 
 export function DarkModeToggle({ modeSelection, setModeSelection, className, ...rest }: MyComponentProps) {
   return modeSelection ? (
-    <Tooltip content={`Toggle dark mode (currently ${modeSelection} mode)`}>
+    <Tooltip content={`切换显示模式 (当前处于 ${modeSelection} 模式)`}>
       <Button
         isIconOnly
         className={`mr-2 rounded-full ${tst} bg-background hover:bg-default-100` + " " + className}
-        aria-label="Toggle dark mode"
+        aria-label="深色模式"
         onPress={() => {
           const newSelected = modeSelections[(modeSelections.indexOf(modeSelection) + 1) % modeSelections.length]
           setModeSelection(newSelected)

@@ -61,7 +61,7 @@ export function PasteInputPanel({ isPasteLoading, state, onStateChange, ...rest 
           }}
         >
           {/*Possibly a bug of chrome, but Tab sometimes has a transient unexpected scrollbar when resizing*/}
-          <Tab key={"edit"} title="Edit" className={"overflow-hidden"}>
+          <Tab key={"edit"} title="编辑" className={"overflow-hidden"}>
             <CodeEditor
               content={state.editContent}
               setContent={(k) => onStateChange({ ...state, editContent: k })}
@@ -70,17 +70,17 @@ export function PasteInputPanel({ isPasteLoading, state, onStateChange, ...rest 
               filename={state.editFilename}
               setFilename={(name) => onStateChange({ ...state, editFilename: name })}
               disabled={isPasteLoading}
-              placeholder={isPasteLoading ? "Loading..." : "Edit your paste here"}
+              placeholder={isPasteLoading ? "加载中..." : "请在此处编辑您的内容"}
             />
           </Tab>
-          <Tab key="file" title="File">
+          <Tab key="file" title="文件">
             <div
               className={
                 `w-full h-[20rem] rounded-xl flex flex-col items-center justify-center cursor-pointer relative ${tst}` +
                 (isDragged ? " bg-primary-100" : " bg-primary-50")
               }
               role="button"
-              aria-label="Select file"
+              aria-label="选择文件"
               onDrop={onDrop}
               onDragEnter={() => setDragged(true)}
               onDragLeave={() => setDragged(false)}
@@ -101,12 +101,12 @@ export function PasteInputPanel({ isPasteLoading, state, onStateChange, ...rest 
                   }
                 }}
               />
-              <div className="text-2xl my-2 font-bold">Select File</div>
+              <div className="text-2xl my-2 font-bold">选择文件</div>
               <p className={`text-1xl text-foreground-500 ${tst} relative`}>
                 <span>
                   {state.file !== null
                     ? `${state.file.name} (${formatSize(state.file.size)})`
-                    : "Click or drag & drop file here"}
+                    : "点击或将文件拖放至此处"}
                 </span>
               </p>
               {state.file && (

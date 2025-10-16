@@ -37,13 +37,13 @@ export function PanelSettingsPanel({ setting, onSettingChange, ...rest }: PasteS
   const radioClassNames = mergeClasses(radioOverrides, { labelWrapper: "ml-2.5" })
   return (
     <Card aria-label="Pastebin setting panel" classNames={cardOverrides} {...rest}>
-      <CardHeader className="text-2xl pl-4 pb-2">Settings</CardHeader>
+      <CardHeader className="text-2xl pl-4 pb-2">设置</CardHeader>
       <Divider className={tst} />
       <CardBody>
         <div className="gap-4 mb-3 flex flex-row">
           <Input
             type="text"
-            label="Expiration"
+            label="到期"
             // to avoid duplicated name, see https://github.com/adobe/react-spectrum/discussions/8037
             aria-labelledby=""
             classNames={{
@@ -60,13 +60,13 @@ export function PanelSettingsPanel({ setting, onSettingChange, ...rest }: PasteS
           />
           <Input
             type="password"
-            label="Password"
+            label="密码"
             aria-labelledby=""
             value={setting.password}
             onValueChange={(p) => onSettingChange({ ...setting, password: p })}
             classNames={inputOverrides}
-            placeholder={"Generated randomly"}
-            description="Used to update/delete your paste"
+            placeholder={"随机生成"}
+            description="用于更新/删除内容"
           />
         </div>
         <RadioGroup
@@ -75,7 +75,7 @@ export function PanelSettingsPanel({ setting, onSettingChange, ...rest }: PasteS
           onValueChange={(v) => onSettingChange({ ...setting, uploadKind: v as UploadKind })}
         >
           <Radio value="short" description={`Example: ${BaseUrl}/BxWH`} classNames={radioClassNames}>
-            Generate a short random URL
+            随机短链接
           </Radio>
           <Radio
             value="long"
@@ -85,10 +85,10 @@ export function PanelSettingsPanel({ setting, onSettingChange, ...rest }: PasteS
               ...radioClassNames,
             }}
           >
-            Generate a long random URL
+            随机长链接
           </Radio>
           <Radio value="custom" classNames={radioClassNames} description={`Example: ${BaseUrl}/~stocking`}>
-            Set by your own
+            自定义链接
           </Radio>
           {setting.uploadKind === "custom" ? (
             <Input
@@ -106,7 +106,7 @@ export function PanelSettingsPanel({ setting, onSettingChange, ...rest }: PasteS
             />
           ) : null}
           <Radio value="manage" classNames={radioClassNames}>
-            <div className="">Update or delete</div>
+            <div className="">更新或删除</div>
           </Radio>
           {setting.uploadKind === "manage" ? (
             <Input
@@ -127,16 +127,15 @@ export function PanelSettingsPanel({ setting, onSettingChange, ...rest }: PasteS
             isSelected={setting.doEncrypt}
             onValueChange={(v) => onSettingChange({ ...setting, doEncrypt: v })}
           >
-            Client-side encryption
+            客户端加密
           </Switch>
           <Tooltip
             content={
               <div className="px-1 py-2 max-w-[20rem]">
-                <h3 className="text-normal font-bold mb-2">Client-side encryption</h3>
+                <h3 className="text-normal font-bold mb-2">客户端加密</h3>
                 <div className="text-small">
-                  Your paste is shared via a URL containing the decryption key in the URL hash, which is never sent to
-                  the server. Decryption happens in the browser, so only those with the key (not the server) can view
-                  the decrypted content.
+				您的粘贴内容通过 URL 共享，URL 哈希值中包含解密密钥，该密钥不会发送到服务器。
+				解密在浏览器中进行，因此只有拥有密钥的人（而不是服务器）才能查看解密后的内容。
                 </div>
               </div>
             }
